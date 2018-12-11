@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <link rel="stylesheet" type="text/css" href="style/style.css" />
+    <meta charset="UTF-8" />
+    <title>Title</title>
+</head>
+<body>
+<div id="logo" th:fragment="header">
+    <div id="logo_text">
+        <!-- class="logo_colour", allows you to change the colour of the text -->
+        <h1><a href="../index.html"><span class="logo_colour">College Registration</span></a></h1>
+        <h2>Manage your subjects!.</h2>
+        <div sec:authorize="isAuthenticated()">
+            Logged user: <span sec:authentication="name">Bob</span>
+            Roles: <span sec:authentication="principal.authorities">[ROLE_USER]</span>
+        </div>
+    </span></div>
+    </div>
+</div>
+
+</body>
+</html>

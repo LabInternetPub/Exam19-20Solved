@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <link rel="stylesheet" type="text/css" href="style/style.css" />
+    <meta charset="UTF-8" />
+    <title>Title</title>
+</head>
+<body>
+
+    <div id="sidebar_container" th:fragment="sideBar">
+        <div class="sidebar">
+            <div class="sidebar_top"></div>
+            <div class="sidebar_item">
+                <!-- insert your sidebar items here -->
+                <h3>Latest News</h3>
+                <h4>Exams have begun</h4>
+                <h5>December 12th, 2018</h5>
+                <p>Tecnocampus students are enjoying the first term exams these days. They look very very happy. They specially love Laboratori d'Aplicacions Internet</p>
+            </div>
+            <div class="sidebar_base"></div>
+        </div>
+        <div class="sidebar">
+            <div class="sidebar_top"></div>
+            <div class="sidebar_item">
+                <h3>Useful Links</h3>
+                <ul>
+                    <li><a href="http://www.tecnocampus.cat">Tecnocampus</a></li>
+                    <li><a href="http://ecampus.tecnocampus.cat">eCampus</a></li>
+                    <li><a href="http://www.upf.edu">UPF</a></li>
+                    <li><a href="https://www.ohtelslesoliveres.es/en/spa.html">Spa (a random one)</a></li>
+                </ul>
+            </div>
+            <div class="sidebar_base"></div>
+        </div>
+    </div>
+
+
+</body>
+</html>

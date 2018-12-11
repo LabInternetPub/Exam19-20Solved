@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" type="text/css" href="style/style.css" />
+    <meta charset="UTF-8" />
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="current(registration)">
+    <h1 th:text="'Academic Year ' + ${registration.academicYear}"></h1>
+    <h3 th:text="${registration.date}"></h3>
+
+    <ul id="registration" th:each="subject : ${registration.subjects}">
+        <!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
+        <li>
+            <h2><span th:text="${subject.code}"/> <span th:text="${subject.name}"/></h2> ECTS: <span th:text="${subject.ects}"/>
+            , Level: <span th:text="${subject.level}"/>, Term: <span th:text="${subject.term}"/>
+            <div th:if="${registration.getSubjectMark(subject.code)>=0.0}">Mark: <span th:text="${registration.getSubjectMark(subject.code)}"/></div>
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>

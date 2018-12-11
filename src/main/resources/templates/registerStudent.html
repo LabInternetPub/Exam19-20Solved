@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>College Registration</title>
+  <meta name="description" content="website description" />
+  <meta name="keywords" content="website keywords, website keywords" />
+  <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
+  <link rel="stylesheet" type="text/css" href="style/style.css" />
+</head>
+
+<body>
+  <div id="main">
+    <div id="header">
+      <div id="logo" th:replace="fragment/header :: header">
+      </div>
+
+      <div id="menubar" th:replace="fragment/menu :: menu">
+      </div>
+    </div>
+
+    <div id="content_header"></div>
+    <div id="site_content">
+      <div id="banner"></div>
+      <div id="sidebar_container" th:replace="fragment/sideBar :: sideBar"></div>
+
+      <div id="content">
+        <h2>Register New Student</h2>
+        <form method="POST" th:object="${student}">
+          <div align = "left" class="errors" th:if="${#fields.hasErrors('*')}">
+            <ul>
+              <li th:each="err : ${#fields.errors('*')}"
+                  th:text="${err}">Input is incorrect</li>
+            </ul>
+          </div>
+
+          <table>
+            <tr>
+              <td><label th:class="${#fields.hasErrors('name')}? 'error'">First Name</label>:</td>
+              <td><input type="text" th:field="*{name}"
+                         th:class="${#fields.hasErrors('name')}? 'error'" /></td>
+            </tr>
+            <tr>
+              <td><label th:class="${#fields.hasErrors('secondName')}? 'error'">Last Name</label>:</td>
+              <td><input type="text" th:field="*{secondName}"
+                         th:class="${#fields.hasErrors('secondName')}? 'error'"/></td>
+            </tr>
+            <tr>
+              <td><label th:class="${#fields.hasErrors('email')}? 'error'">Email</label>:</td>
+              <td><input type="text" th:field="*{email}"
+                         th:class="${#fields.hasErrors('email')}? 'error'"/></td>
+            </tr>
+            <tr>
+              <td><label th:class="${#fields.hasErrors('password')}? 'error'">Password</label>:</td>
+              <td><input type="password" th:field="*{password}"
+                         th:class="${#fields.hasErrors('password')}? 'error'"/></td>
+            </tr>
+          </table>
+
+          <input type="submit" value="Create Student" />
+
+
+        </form>
+      </div>
+
+    </div>
+    <div id="content_footer"></div>
+    <div id="footer" th:replace="fragment/footer::footer"></div>
+  </div>
+</body>
+</html>

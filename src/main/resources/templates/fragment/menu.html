@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" type="text/css" href="style/style.css" />
+    <meta charset="UTF-8" />
+    <title>Title</title>
+</head>
+<body>
+<div id="menubar" th:fragment="menu">
+    <ul id="menu">
+        <!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
+        <li><a href="/lastRegistration">Last Registration</a></li>
+        <li><a href="/academicRecord">Academic Record</a></li>
+        <li><a href="/subjectList">Subject List</a></li>
+        <li><a href="/studentList">Student List</a></li>
+        <li><a href="/registerSubjects">Register Subjects</a></li>
+        <li><a href="/registerStudent">New Student</a></li>
+    </ul>
+</div>
+
+</body>
+</html>

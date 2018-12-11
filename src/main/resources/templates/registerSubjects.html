@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>College Registration</title>
+  <meta name="description" content="website description" />
+  <meta name="keywords" content="website keywords, website keywords" />
+  <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
+  <link rel="stylesheet" type="text/css" href="/style/style.css" />
+</head>
+
+<body>
+  <div id="main">
+    <div id="header">
+      <div id="logo" th:replace="fragment/header :: header">
+      </div>
+
+      <div id="menubar" th:replace="fragment/menu :: menu">
+      </div>
+    </div>
+
+    <div id="content_header"></div>
+    <div id="site_content">
+      <div id="banner"></div>
+	  <div id="sidebar_container" th:replace="fragment/sideBar :: sideBar"></div>
+
+      <div id="content">
+        <h2>Register Subjects</h2>
+        <div th:if="${errorMsg != ''}"><h3 th:text="${errorMsg}"></h3></div>
+        <form method="POST" action="/registerSubjects">
+          <div th:each="key : ${#lists.sort(subjectsToDo.keySet())}" th:unless="${subjectsToDo.get(key).isEmpty()}">
+            <h1 th:text="${key}"></h1>
+            <div th:each="subject : ${subjectsToDo.get(key)}">
+              <input type="checkbox" name="subjects" th:value="${subject.code}"> <span th:text="${subject.name}"></span></input>
+            </div>
+          </div>
+
+          <h1><input type="submit" value="Register Subjects" /></h1>
+        </form>
+      </div>
+
+    </div>
+    <div id="content_footer"></div>
+    <div id="footer" th:replace="fragment/footer::footer"></div>
+  </div>
+</body>
+</html>
