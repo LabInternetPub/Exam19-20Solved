@@ -34,8 +34,7 @@ CREATE TABLE convocation (
   subject VARCHAR (10) NOT NULL,
   mark DOUBLE DEFAULT -1,
   FOREIGN KEY (subject) REFERENCES subject(code),
-  FOREIGN KEY (student) REFERENCES registration(student),
-  FOREIGN KEY (date) REFERENCES registration(date),
+  FOREIGN KEY (student, date) REFERENCES registration(student, date),
   PRIMARY KEY (subject, student, date)
 );
 

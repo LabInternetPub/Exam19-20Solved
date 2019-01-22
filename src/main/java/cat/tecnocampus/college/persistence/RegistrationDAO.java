@@ -113,7 +113,7 @@ public class RegistrationDAO {
     }
 
     private void saveRegistration(Registration registration) {
-        jdbcTemplate.update(INSERT_REGISTRATION, registration.getStudent().getEmail(), registration.getAcademicYear(), registration.getDate());
+        jdbcTemplate.update(INSERT_REGISTRATION, registration.getStudent().getEmail(), registration.getAcademicYear(), Date.valueOf(registration.getDate()));
     }
 
     private void saveConvocations(Registration registration) {

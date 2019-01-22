@@ -32,7 +32,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/lastRegistration").hasRole("USER")
                 .antMatchers("/academicRecord").hasRole("USER")
                 .antMatchers("/registerSubjects").hasRole("USER")
-                .antMatchers("/registerSubjects").permitAll()
+                .antMatchers("/registerStudent").permitAll()
                 .anyRequest().authenticated()
 
                 .and()

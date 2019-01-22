@@ -66,7 +66,6 @@ public class webController {
 
     @PostMapping("registerSubjects")
     public String registerSubjectsPost(@RequestParam List<String> subjects, Model model, Principal principal) {
-        System.out.println("registering subjects: " + subjects);
         college.registerSubjects(principal.getName(), subjects);
 
         return "redirect:lastRegistration";

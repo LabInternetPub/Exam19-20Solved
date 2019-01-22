@@ -22,6 +22,10 @@ INSERT INTO convocation(date, student , subject) VALUES (parsedatetime('2018-09-
 INSERT INTO convocation(date, student , subject) VALUES (parsedatetime('2018-09-01', 'yyyy-MM-dd'), 'roure@tecnocampus.cat', '103234');
 */
 
+INSERT INTO registration(student, academic_year, date) VALUES ('alvarez@tecnocampus.cat', '2017/2018', parsedatetime('2017-09-01', 'yyyy-MM-dd'));
+INSERT INTO convocation(date, student , subject, mark) VALUES (parsedatetime('2017-09-01', 'yyyy-MM-dd'), 'alvarez@tecnocampus.cat', '103114', 7.2);
+INSERT INTO convocation(date, student , subject, mark) VALUES (parsedatetime('2017-09-01', 'yyyy-MM-dd'), 'alvarez@tecnocampus.cat', '103112',  10.0);
+
 -- Authorities
 INSERT INTO authorities (email, role) VALUES ('roure@tecnocampus.cat', 'ROLE_USER');
 INSERT INTO authorities (email, role) VALUES ('roure@tecnocampus.cat', 'ROLE_ADMIN');
