@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -19,10 +20,10 @@ import java.util.Map;
 import java.util.Optional;
 
 @Controller
-public class webController {
+public class WebController {
     CollegeController college;
 
-    public webController(CollegeController college) {
+    public WebController(CollegeController college) {
         this.college = college;
     }
 
@@ -79,11 +80,12 @@ public class webController {
     }
 
     @PostMapping("registerStudent")
-    public String registerStudentPost(@Valid Student student, Errors errors, Model model) {
+    public String registerStudentPost(@Valid Student student, Errors errors, RedirectAttributes redirectAttributes) {
         if (errors.hasErrors()) {
             return "registerStudent";
         }
 
+        redirectAttributes.addFlashAttribute("student", student);
         college.registerStudent(student);
 
         return "redirect:login";

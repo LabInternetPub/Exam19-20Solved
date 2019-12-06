@@ -23,12 +23,15 @@ public class CollegeController {
     private SubjectDAO subjectDAO;
     private SecurityDAO securityDAO;
     private College college;
+    private PasswordEncoder passwordEncoder;
 
-    public CollegeController(RegistrationDAO registrationDAO, StudentDAO studentDAO, SubjectDAO subjectDAO, SecurityDAO securityDAO) {
+    public CollegeController(RegistrationDAO registrationDAO, StudentDAO studentDAO, SubjectDAO subjectDAO,
+                             SecurityDAO securityDAO, PasswordEncoder passwordEncoder) {
         this.registrationDAO = registrationDAO;
         this.studentDAO = studentDAO;
         this.subjectDAO = subjectDAO;
         this.securityDAO = securityDAO;
+        this.passwordEncoder = passwordEncoder;
 
         college = new College();
         college.setSubjects(subjectDAO.getAllSubjects());
@@ -73,9 +76,8 @@ public class CollegeController {
     }
 
     public void registerStudent(Student student) {
-        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
-        student.setPassword(encoder.encode(student.getPassword()));
+        student.setPassword(passwordEncoder.encode(student.getPassword()));
         studentDAO.saveStudent(student);
         securityDAO.createRole(student);
     }
