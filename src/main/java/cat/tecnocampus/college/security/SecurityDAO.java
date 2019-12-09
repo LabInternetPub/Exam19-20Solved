@@ -1,5 +1,6 @@
 package cat.tecnocampus.college.security;
 
+import domain.Lecturer;
 import domain.Student;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -16,5 +17,8 @@ public class SecurityDAO {
 
     public void createUserRole(Student student) {
         jdbcTemplate.update(INSERT_ROLE, student.getEmail(), "ROLE_USER");
+    }
+    public void createUserRole(Lecturer lecturer) {
+        jdbcTemplate.update(INSERT_ROLE, lecturer.getEmail(), "ROLE_USER");
     }
 }

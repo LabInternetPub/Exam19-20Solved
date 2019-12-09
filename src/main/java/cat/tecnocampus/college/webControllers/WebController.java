@@ -2,6 +2,7 @@ package cat.tecnocampus.college.webControllers;
 
 import cat.tecnocampus.college.domainController.CollegeController;
 import domain.College;
+import domain.Lecturer;
 import domain.Student;
 import domain.Subject;
 import org.springframework.stereotype.Controller;
@@ -90,6 +91,28 @@ public class WebController {
 
         return "redirect:login";
     }
+
+    @GetMapping("registerLecturer")
+    public String registerLecturerGet(Model model) {
+        model.addAttribute("lecturer", new Lecturer());
+        model.addAttribute("subjects", college.getSubjects());
+
+        return "registerLecturer";
+    }
+
+    @PostMapping("registerLecturer")
+    public String registerLecturerPost(@Valid Lecturer lecturer, Errors errors, Model model, RedirectAttributes redirectAttributes) {
+        if (errors.hasErrors()) {
+            model.addAttribute("subjects", college.getSubjects());
+            return "registerLecturer";
+        }
+
+        redirectAttributes.addFlashAttribute("lecturer", lecturer);
+        college.registerLecturer(lecturer);
+
+        return "redirect:login";
+    }
+
 
     @GetMapping("/markStudents")
     public String markStudents(Model model) {

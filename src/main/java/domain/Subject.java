@@ -13,6 +13,10 @@ public class Subject {
     public Subject() {
     }
 
+    public Subject(String code) {
+        this.code = code;
+    }
+
     public String getCode() {
         return code;
     }

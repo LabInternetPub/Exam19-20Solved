@@ -84,4 +84,10 @@ public class CollegeController {
     public List<Lecturer> getAllLecturers() {
         return lecturerDAO.getLecturersWithCurrentSubjects();
     }
+
+    public void registerLecturer(Lecturer lecturer) {
+        lecturer.setPassword(passwordEncoder.encode(lecturer.getPassword()));
+        lecturerDAO.saveLecturer(lecturer);
+        securityDAO.createUserRole(lecturer);
+    }
 }

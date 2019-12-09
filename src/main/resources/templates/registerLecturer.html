@@ -26,7 +26,7 @@
 
       <div id="content">
         <h2>Register New Lecturer</h2>
-        <form method="POST" th:object="${student}">
+        <form method="POST" th:object="${lecturer}">
           <div align = "left" class="errors" th:if="${#fields.hasErrors('*')}">
             <ul>
               <li th:each="err : ${#fields.errors('*')}"
@@ -59,8 +59,13 @@
                          th:class="${#fields.hasErrors('password')}? 'error'"/></td>
             </tr>
           </table>
+          <h3> Select teaching subjects:</h3>
+          <select th:multiple="multiple" th:field="*{currentSubjects}" >
+            <option th:each="subject : ${subjects}" th:value="${subject.code}"
+                    th:text="${subject.code} + ' ' +${subject.name}"></option>
+          </select>
 
-          <input type="submit" value="Create Student" />
+          <div><input type="submit" value="Create Lecturer" /></div>
 
 
         </form>
