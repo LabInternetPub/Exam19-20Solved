@@ -59,5 +59,4 @@ public class StudentDAO {
         jdbcTemplate.update(INSERT_STUDENT, student.getName(), student.getSecondName(), student.getEmail(), student.getPassword());
         jdbcTemplate.update(INSERT_STUDENT_ROLE, student.getEmail());
     }
-
 }

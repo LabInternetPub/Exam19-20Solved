@@ -38,6 +38,16 @@ CREATE TABLE convocation (
   PRIMARY KEY (subject, student, date)
 );
 
+DROP TABLE if EXISTS impartition;
+CREATE TABLE impartition (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  lecturer VARCHAR (100) NOT NULL,
+  subject VARCHAR (10) NOT NULL,
+  academic_year VARCHAR (9),
+  FOREIGN KEY (lecturer) REFERENCES myuser(email),
+  FOREIGN KEY (subject) REFERENCES subject(code)
+);
+
 DROP TABLE if EXISTS authorities;
 CREATE TABLE authorities (
   authority_id int(11) NOT NULL AUTO_INCREMENT,

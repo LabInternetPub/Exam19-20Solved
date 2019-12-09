@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>College Registration</title>
+  <meta name="description" content="website description" />
+  <meta name="keywords" content="website keywords, website keywords" />
+  <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
+  <link rel="stylesheet" type="text/css" href="style/style.css" />
+</head>
+
+<body>
+  <div id="main">
+    <div id="header">
+      <div id="logo" th:replace="fragment/header :: header">
+      </div>
+
+      <div id="menubar" th:replace="fragment/menu :: menu">
+      </div>
+    </div>
+
+    <div id="content_header"></div>
+    <div id="site_content">
+      <div id="banner"></div>
+      <div id="sidebar_container" th:replace="fragment/sideBar :: sideBar"></div>
+
+      <div id = "content">
+        <h2>Lecturer List</h2>
+        <ol>
+          <li th:each="lecturer : ${lecturers}" >
+            <span th:text="${lecturer.name} + ' ' +${lecturer.secondName} + ', ' + ${lecturer.email}"> </span>
+            <h3>Current Subjects</h3>
+            <ul>
+              <li th:each="subject : ${lecturer.currentSubjects}" th:text="${subject.code} + ' ' + ${subject.name} + ', ' + ${subject.ects} + ' ECTS'"></li>
+            </ul>
+          </li>
+        </ol>
+      </div>
+
+    </div>
+    <div id="content_footer"></div>
+    <div id="footer" th:replace="fragment/footer::footer"></div>
+  </div>
+</body>
+</html>

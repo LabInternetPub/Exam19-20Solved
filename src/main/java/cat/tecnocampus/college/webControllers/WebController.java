@@ -98,4 +98,10 @@ public class WebController {
         return "markStudents";
     }
 
+    @GetMapping("lecturerList")
+    public String listLecturers(Model model) {
+        model.addAttribute("lecturers", college.getAllLecturers());
+        return "lecturerList";
+    }
+
 }
