@@ -91,4 +91,11 @@ public class WebController {
         return "redirect:login";
     }
 
+    @GetMapping("/markStudents")
+    public String markStudents(Model model) {
+        model.addAttribute("subjects", college.getSubjects());
+
+        return "markStudents";
+    }
+
 }

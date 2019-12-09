@@ -15,9 +15,11 @@ public class StudentDAO {
     JdbcTemplate jdbcTemplate;
     RegistrationDAO registrationDAO;
 
-    private final String QUERY_ALL_STUDENTS_LAZY = "select name, second_name, email, password from student";
-    private final String QUERY_STUDENT_LAZY = "select name, second_name, email, password from student where email = ?";
-    private final String INSERT_STUDENT = "INSERT INTO student (name, second_name, email, password) VALUES (?, ?, ?, ?)";
+    private final String QUERY_ALL_STUDENTS_LAZY = "select u.name, u.second_name, u.email, u.password from myuser u " +
+            "inner join authorities a on u.email = a.email where a.role like '%STUDENT'";
+    private final String QUERY_STUDENT_LAZY = "select name, second_name, email, password from myuser where email = ?";
+    private final String INSERT_STUDENT = "INSERT INTO myuser (name, second_name, email, password) VALUES (?, ?, ?, ?)";
+    private final String INSERT_STUDENT_ROLE = "INSERT INTO authorities (email, role) values(?,'ROLE_STUDENT')";
 
     private RowMapper<Student> mapper = (resultSet, i) -> {
         Student student = new Student();
@@ -55,6 +57,7 @@ public class StudentDAO {
 
     public void saveStudent(Student student) {
         jdbcTemplate.update(INSERT_STUDENT, student.getName(), student.getSecondName(), student.getEmail(), student.getPassword());
+        jdbcTemplate.update(INSERT_STUDENT_ROLE, student.getEmail());
     }
 
 }

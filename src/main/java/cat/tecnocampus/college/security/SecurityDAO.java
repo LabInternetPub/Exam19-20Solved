@@ -14,7 +14,7 @@ public class SecurityDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public void createRole(Student student) {
+    public void createUserRole(Student student) {
         jdbcTemplate.update(INSERT_ROLE, student.getEmail(), "ROLE_USER");
     }
 }

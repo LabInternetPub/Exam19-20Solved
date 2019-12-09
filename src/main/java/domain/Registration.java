@@ -30,9 +30,12 @@ public class Registration {
         subjects = new ArrayList<>();
         grades = new HashMap<>();
 
-        if (date.getDayOfYear() >= FIRST_APRIL && date.getDayOfYear() <= LAST_DECEMBER)
-            this.academicYear = String.valueOf(date.getYear()) + "/" + String.valueOf(date.getYear()+1);
-        this.academicYear = String.valueOf(date.getYear()-1) + "/" + String.valueOf(date.getYear());;
+        if (date.getDayOfYear() >= FIRST_APRIL && date.getDayOfYear() <= LAST_DECEMBER) {
+            this.academicYear = String.valueOf(date.getYear()) + "/" + String.valueOf(date.getYear() + 1);
+        }
+        else {
+            this.academicYear = String.valueOf(date.getYear() - 1) + "/" + String.valueOf(date.getYear());
+        }
     }
 
     public Student getStudent() {
@@ -64,7 +67,6 @@ public class Registration {
     }
 
     public void setSubjects(List<Subject> subjects) {
-        System.out.println("Registration set subjects called: " + subjects);
         this.subjects.addAll(subjects);
     }
 

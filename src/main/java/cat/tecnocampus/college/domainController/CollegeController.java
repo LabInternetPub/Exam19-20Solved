@@ -8,7 +8,6 @@ import domain.College;
 import domain.Registration;
 import domain.Student;
 import domain.Subject;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -79,6 +78,6 @@ public class CollegeController {
 
         student.setPassword(passwordEncoder.encode(student.getPassword()));
         studentDAO.saveStudent(student);
-        securityDAO.createRole(student);
+        securityDAO.createUserRole(student);
     }
 }

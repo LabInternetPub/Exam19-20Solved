@@ -1,5 +1,5 @@
-DROP TABLE if EXISTS student;
-CREATE TABLE student
+DROP TABLE if EXISTS myuser;
+CREATE TABLE myuser
 (
   email VARCHAR (100) PRIMARY KEY,
   name VARCHAR (255),
@@ -23,7 +23,7 @@ CREATE TABLE registration (
   student VARCHAR (100) NOT NULL,
   academic_year VARCHAR (9),
   date DATE NOT NULL ,
-  FOREIGN KEY (student) REFERENCES student(email),
+  FOREIGN KEY (student) REFERENCES myuser(email),
   PRIMARY KEY (student, date)
 );
 
@@ -45,4 +45,4 @@ CREATE TABLE authorities (
   role varchar(45) NOT NULL,
   PRIMARY KEY (authority_id),
   UNIQUE KEY uni_username_role (role,email),
-  CONSTRAINT fk_username FOREIGN KEY (email) REFERENCES student (email));
+  CONSTRAINT fk_username FOREIGN KEY (email) REFERENCES myuser (email));

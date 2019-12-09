@@ -32,7 +32,7 @@ public class RegistrationDAO {
             "sb.name as subjects_name, sb.code as subjects_code, sb.ects as subjects_ects, sb.term as subjects_term, sb.level as subjects_level,  " +
             "c.subject as grade_key, c.mark as grade_mark from registration r " +
             "inner join convocation c on r.date = c.date and c.student = r.student " +
-            "inner join student st on r.student = st.email " +
+            "inner join myuser st on r.student = st.email " +
             "inner join subject sb on c.subject = sb.code " +
             "order by (r.student, r.date)";
 
@@ -43,7 +43,7 @@ public class RegistrationDAO {
             "c.mark as grade_mark " +
             "from registration r " +
             "inner join convocation c on r.date = c.date and c.student = r.student " +
-            "inner join student st on r.student = st.email " +
+            "inner join myuser st on r.student = st.email " +
             "inner join subject sb on c.subject = sb.code " +
             "where r.student = ? " +
             "order by (r.student, r.date)";
@@ -143,9 +143,12 @@ public class RegistrationDAO {
         return registrations.get(registrations.size() - 1);
     }
 
-
     private void sameStudentSameObject(List<Registration> registrations) {
         HashMap<String, Student> students = new HashMap<>();
         registrations.forEach(r -> {students.putIfAbsent(r.getStudent().getEmail(),r.getStudent()); r.setStudent(students.get(r.getStudent().getEmail()));});
+    }
+
+    public List<Registration> registrationListFromSubjectCurrentSchoolYear(String subjectCode) {
+        return null;
     }
 }

@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private DataSource dataSource;
 
-    private static final String USERS_QUERY = "select email, password, enabled from student where email = ?";
+    private static final String USERS_QUERY = "select email, password, enabled from myuser where email = ?";
 
     private static final String AUTHORITIES_QUERY = "select email, role from authorities where email = ?";
 
