@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <link rel="stylesheet" type="text/css" href="style/style.css" />
     <meta charset="UTF-8" />
@@ -9,15 +10,15 @@
 <div id="menubar" th:fragment="menu">
     <ul id="menu">
         <!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
-        <li><a href="/lastRegistration">Last Registration</a></li>
-        <li><a href="/academicRecord">Academic Record</a></li>
+        <li sec:authorize="hasRole('ROLE_STUDENT')"><a href="/lastRegistration">Last Registration</a></li>
+        <li sec:authorize="hasRole('ROLE_STUDENT')"><a href="/academicRecord">Academic Record</a></li>
         <li><a href="/subjectList">Subject List</a></li>
-        <li><a href="/studentList">Student List</a></li>
-        <li><a href="/lecturerList">Lecturer List</a></li>
-        <li><a href="/registerSubjects">Register Subjects</a></li>
-        <li><a href="/registerStudent">New Student</a></li>
-        <li><a href="/registerLecturer">New Lecturer</a></li>
-        <li><a href="/markStudents">Mark Students</a></li>
+        <li sec:authorize="hasRole('ROLE_STUDENT') or hasRole('ROLE_LECTURER')"><a href="/studentList">Student List</a></li>
+        <li sec:authorize="isAuthenticated()"><a href="/lecturerList">Lecturer List</a></li>
+        <li sec:authorize="hasRole('ROLE_STUDENT')"><a href="/registerSubjects">Register Subjects</a></li>
+        <li sec:authorize="hasRole('ROLE_LECTURER')"><a href="/registerStudent">New Student</a></li>
+        <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/registerLecturer">New Lecturer</a></li>
+        <li sec:authorize="hasRole('ROLE_LECTURER')"><a href="/markStudents">Mark Students</a></li>
     </ul>
 </div>
 
