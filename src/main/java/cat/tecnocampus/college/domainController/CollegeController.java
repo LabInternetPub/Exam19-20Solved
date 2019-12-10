@@ -4,7 +4,6 @@ import cat.tecnocampus.college.persistence.LecturerDAO;
 import cat.tecnocampus.college.persistence.RegistrationDAO;
 import cat.tecnocampus.college.persistence.StudentDAO;
 import cat.tecnocampus.college.persistence.SubjectDAO;
-import cat.tecnocampus.college.security.SecurityDAO;
 import domain.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -19,17 +18,15 @@ public class CollegeController {
     private StudentDAO studentDAO;
     private SubjectDAO subjectDAO;
     private LecturerDAO lecturerDAO;
-    private SecurityDAO securityDAO;
     private College college;
     private PasswordEncoder passwordEncoder;
 
     public CollegeController(RegistrationDAO registrationDAO, StudentDAO studentDAO, SubjectDAO subjectDAO,
-                             LecturerDAO lecturerDAO, SecurityDAO securityDAO, PasswordEncoder passwordEncoder) {
+                             LecturerDAO lecturerDAO, PasswordEncoder passwordEncoder) {
         this.registrationDAO = registrationDAO;
         this.studentDAO = studentDAO;
         this.subjectDAO = subjectDAO;
         this.lecturerDAO = lecturerDAO;
-        this.securityDAO = securityDAO;
         this.passwordEncoder = passwordEncoder;
 
         college = new College();
@@ -78,7 +75,6 @@ public class CollegeController {
 
         student.setPassword(passwordEncoder.encode(student.getPassword()));
         studentDAO.saveStudent(student);
-        securityDAO.createUserRole(student);
     }
 
     public List<Lecturer> getAllLecturers() {
@@ -88,6 +84,5 @@ public class CollegeController {
     public void registerLecturer(Lecturer lecturer) {
         lecturer.setPassword(passwordEncoder.encode(lecturer.getPassword()));
         lecturerDAO.saveLecturer(lecturer);
-        securityDAO.createUserRole(lecturer);
     }
 }

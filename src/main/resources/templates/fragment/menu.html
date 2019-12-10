@@ -13,12 +13,12 @@
         <li sec:authorize="hasRole('ROLE_STUDENT')"><a href="/lastRegistration">Last Registration</a></li>
         <li sec:authorize="hasRole('ROLE_STUDENT')"><a href="/academicRecord">Academic Record</a></li>
         <li><a href="/subjectList">Subject List</a></li>
-        <li sec:authorize="hasRole('ROLE_STUDENT') or hasRole('ROLE_LECTURER')"><a href="/studentList">Student List</a></li>
+        <li sec:authorize="hasRole('ROLE_STUDENT') or hasRole('ROLE_LECTURER') or hasRole('ROLE_ADMIN')"><a href="/studentList">Student List</a></li>
         <li sec:authorize="isAuthenticated()"><a href="/lecturerList">Lecturer List</a></li>
         <li sec:authorize="hasRole('ROLE_STUDENT')"><a href="/registerSubjects">Register Subjects</a></li>
-        <li sec:authorize="hasRole('ROLE_LECTURER')"><a href="/registerStudent">New Student</a></li>
+        <li sec:authorize="!isAuthenticated()"><a href="/registerStudent">New Student</a></li>
         <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/registerLecturer">New Lecturer</a></li>
-        <li sec:authorize="hasRole('ROLE_LECTURER')"><a href="/markStudents">Mark Students</a></li>
+        <li sec:authorize="hasRole('ROLE_LECTURER')"><a href="/markStudents">Grade Students</a></li>
     </ul>
 </div>
 

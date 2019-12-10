@@ -25,12 +25,13 @@
       <div id="sidebar_container" th:replace="fragment/sideBar :: sideBar"></div>
 
       <div id = "content">
+        <h1> Still to be implemented!!! Come back soon.</h1>
         <h2>Select a subject to mark its students</h2>
         <ol>
-          <li th:each="subject : ${subjects}"><a href="${'markSubject/' + subject.code}">
+          <li th:each="subject : ${subjects}">
             <span th:text="${subject.code}"/> <span th:text="${subject.name}"/></h2> ECTS: <span th:text="${subject.ects}"/>
             , Level: <span th:text="${subject.level}"/>, Term: <span th:text="${subject.term}"/>
-          </a></li>
+          </li>
         </ol>
       </div>
 
