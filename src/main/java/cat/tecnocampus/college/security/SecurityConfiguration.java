@@ -23,15 +23,31 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         this.dataSource = dataSource;
     }
 
-    //TODO 1:
+    /*
+    TODO 1: This bean should create a password encoder. The one of security version 5, in which the generated password
+     follows the sintax {nam of encoder}password
+     For example {noop}pepe   is saying that the password is not encripted and the password is pepe
+     */
     @Bean
     PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
+    /*
+    TODO 2: You need to modify the following security configuration so that
+        * every body can perform (even not logged in users)  "/subjectList", "/registerStudent",
+        * only admins and lecturers can perform "/studentList"
+        * "/lastRegistration", "/academicRecord", "/registerSubjects" can only be performed by students
+        * "/markStudents" can only be perfomred by lecturers
+        * "/registerLecturer" can only be performed by admins
+        * "/lecturerList" can be performed by authenticated users
+     Recall from the readme file that the system has three defined roles: ADMIN, STUDENT and LECTURER
+     Note that the current definition contains a line that may make the whole security configuration useless
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .antMatchers("/*").permitAll()
                 .antMatchers("/h2-console/**").permitAll()
                 .antMatchers("/images/**").permitAll()
                 .antMatchers("/style/**").permitAll()
@@ -44,8 +60,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/registerStudent").permitAll()
                 .antMatchers("/registerLecturer").hasRole("ADMIN")
                 .antMatchers("/markStudents").hasRole("LECTURER")
-                .antMatchers("/lecturerList").hasAnyRole("LECTURER", "ADMIN")
-                .antMatchers("/**").hasRole("ADMIN")
+                .antMatchers("/lecturerList").authenticated()
                 .anyRequest().authenticated()
 
                 .and()

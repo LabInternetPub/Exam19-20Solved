@@ -26,10 +26,9 @@ public class LecturerDAO {
             "from myuser u " +
             "inner join authorities a on u.email = a.email " +
             "left outer join impartition i on i.lecturer = u.email " +
-            "inner join subject s on s.code = i.subject " +
+            "left outer join subject s on s.code = i.subject " +
             "where a.role like '%LECTURER'";
 
-    private final String QUERY_LECTURER_LAZY = "select name, second_name, email, password from myuser where email = ?";
     private final String INSERT_LECTURER = "INSERT INTO myuser (name, second_name, email, password) VALUES (?, ?, ?, ?)";
     private final String INSERT_LECTURER_ROLE = "INSERT INTO authorities (email, role) values(?,'ROLE_LECTURER')";
     private final String INSERT_IMPARTITION = "INSERT INTO impartition (lecturer, subject, academic_year) VALUES (?, ?, ?)";
@@ -38,17 +37,31 @@ public class LecturerDAO {
         this.jdbcTemplate = jdbcTemplate;
         rse = JdbcTemplateMapperFactory
                 .newInstance()
-                .addKeys("email", "code")
+                .addKeys("email")
                 .newResultSetExtractor(Lecturer.class);
 
     }
 
+    /*
+    TODO 6 (to do at home when you have time. Don't waste your time now)
+     Just wanted you to realize the great amount of work the ResutlSetExtractorImpl can do for us. At home when you have
+     time look at QUERY_ALL_LECTURERS_CURRENT_SUBJECTS, the constructor of the class the method below. It is able to build
+     the hole Lecture object by its own (with the correct names in the columns of the sql select)
+     */
     public List<Lecturer> getLecturersWithCurrentSubjects() {
         List<Lecturer> lecturers = this.jdbcTemplate
                 .query(QUERY_ALL_LECTURERS_CURRENT_SUBJECTS, rse);
         return lecturers;
     }
 
+    /*
+    TODO 7
+     You need to save the lecturer into the database. Need to do three steps
+     1.- insert the lecturer into the user's table. You may want to use INSERT_LECTURER
+     2.- insert the role into the authorities' table. You may want to use INSERT_LECTURER_ROLE
+     3.- insert the subjects the lecturer is going to teach into impartititon's table. You may want to use INSERT_IMPARTITION
+        Note that a lecturer may have more than one subjects. We want it to be efficient
+     */
     public void saveLecturer(Lecturer lecturer) {
         jdbcTemplate.update(INSERT_LECTURER, lecturer.getName(), lecturer.getSecondName(), lecturer.getEmail(), lecturer.getPassword());
         jdbcTemplate.update(INSERT_LECTURER_ROLE, lecturer.getEmail());

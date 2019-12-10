@@ -31,7 +31,7 @@
             <span th:text="${lecturer.name} + ' ' +${lecturer.secondName} + ', ' + ${lecturer.email}"> </span>
             <h3>Current Subjects</h3>
             <ul>
-              <li th:each="subject : ${lecturer.currentSubjects}" th:text="${subject.code} + ' ' + ${subject.name} + ', ' + ${subject.ects} + ' ECTS'"></li>
+              <li th:each="subject : ${lecturer.currentSubjects}" th:if="${subject.code != null}" th:text="${subject.code} + ' ' + ${subject.name} + ', ' + ${subject.ects} + ' ECTS'"></li>
             </ul>
           </li>
         </ol>

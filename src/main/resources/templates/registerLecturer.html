@@ -33,9 +33,6 @@
                   th:text="${err}">Input is incorrect</li>
             </ul>
           </div>
-          <div th:if="${userExists != null}" class="errors" th:text="${'email already exists in the system'}">
-            I wonder, if variable exists...
-          </div>
 
           <table>
             <tr>
@@ -60,6 +57,12 @@
             </tr>
           </table>
           <h3> Select teaching subjects:</h3>
+
+          <!--
+          TODO 5.1
+          Here we need to have a multiple select with the list of all subjects. The select should show the name and code of the
+          subject to the user and send only the code of the selected ones. Remember that the name of the Lecturer property
+          is called CurrentSubjects -->
           <select th:multiple="multiple" th:field="*{currentSubjects}" >
             <option th:each="subject : ${subjects}" th:value="${subject.code}"
                     th:text="${subject.code} + ' ' +${subject.name}"></option>

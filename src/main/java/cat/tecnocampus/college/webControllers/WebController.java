@@ -81,12 +81,11 @@ public class WebController {
     }
 
     @PostMapping("registerStudent")
-    public String registerStudentPost(@Valid Student student, Errors errors, RedirectAttributes redirectAttributes) {
+    public String registerStudentPost(@Valid Student student, Errors errors) {
         if (errors.hasErrors()) {
             return "registerStudent";
         }
 
-        redirectAttributes.addFlashAttribute("student", student);
         college.registerStudent(student);
 
         return "redirect:login";
@@ -100,16 +99,31 @@ public class WebController {
         return "registerLecturer";
     }
 
+    /*
+    TODO  5
+     When we register a new lecturer we need the very same information as for a student (they both are users) but also
+     the subjects they are teaching. Observe in the following method that we pass a list of all the subjects in the system
+     to the form. Wee need the form to show to the user the list of the subjects so that she can select the ones she is
+     going to teach.
+     If the form is done correctly the spring will be able to fill in all the Lecturer values including the list of current
+     (teaching) subjects. That is to say a list with Java objects of the Subject class. In fact, we need the subjects
+     with only their code filled in. Note that the Lecturers' subjects list is called CurrentSubjects
+     In this exercise you only need to complete the "registerLecturer.html" form. Go to todo_5.1
+     */
+
+    /*
+    TODO 8
+     Complete the following method so that Spring validates the lecturer and returns the form to the user when it is
+     not properly filled in (you can see that the User class has the appropriate annotations).
+     */
     @PostMapping("registerLecturer")
-    public String registerLecturerPost(@Valid Lecturer lecturer, Errors errors, Model model, RedirectAttributes redirectAttributes) {
+    public String registerLecturerPost(@Valid Lecturer lecturer, Errors errors, Model model) {
         if (errors.hasErrors()) {
             model.addAttribute("subjects", college.getSubjects());
             return "registerLecturer";
         }
 
-        redirectAttributes.addFlashAttribute("lecturer", lecturer);
         college.registerLecturer(lecturer);
-
         return "redirect:login";
     }
 
