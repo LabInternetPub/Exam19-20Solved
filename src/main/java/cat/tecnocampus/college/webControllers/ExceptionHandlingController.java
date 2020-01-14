@@ -68,6 +68,8 @@ public class ExceptionHandlingController {
         logger.error("Request: " + request.getRequestURL() + " raised " + ex);
 
         if (request.getRequestURL().toString().contains("registerStudent")) {
+            //Could have done:
+            //Student s = (Student) request.getSession().getAttribute("student");
             Student student = createStudentFromRequest(request);
             model.addAttribute("student", student);
             model.addAttribute("studentExists", "exists");

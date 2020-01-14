@@ -119,6 +119,7 @@ public class WebController {
     @PostMapping("registerLecturer")
     public String registerLecturerPost(@Valid Lecturer lecturer, Errors errors, Model model) {
         if (errors.hasErrors()) {
+            model.addAttribute("lecturer", lecturer);
             model.addAttribute("subjects", college.getSubjects());
             return "registerLecturer";
         }

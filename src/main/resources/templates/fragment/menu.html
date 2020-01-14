@@ -21,6 +21,11 @@ Grade Students: only by lecturers
 <body>
 <div id="menubar" th:fragment="menu">
     <ul id="menu">
+        <!-- to add selected
+                   <li th:classappend="${url} == '/lastRegistration'? 'selected' :null ">
+                <a href="/lastRegistration" sec:authorize="hasRole('ROLE_STUDENT')">Last
+                    Registration</a></li>
+-->
         <!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
         <li sec:authorize="hasRole('ROLE_STUDENT')"><a href="/lastRegistration">Last Registration</a></li>
         <li sec:authorize="hasRole('ROLE_STUDENT')"><a href="/academicRecord">Academic Record</a></li>
